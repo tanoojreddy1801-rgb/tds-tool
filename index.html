@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {font-family: Arial; padding:15px; background:#f5f7ff;}
+input {width:100%; padding:12px; font-size:16px;}
+ul {list-style:none; padding:0; max-height:200px; overflow-y:auto;}
+li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
+li:hover {background:#e8eaf6;}
+.result {margin-top:15px; background:#eef2ff; padding:10px;}
+</style>
+</head>
+
+<body>
+
+<h3>TDS Compliance Checker</h3>
+
+<input type="text" id="search" placeholder="Search...">
+<ul id="list"></ul>
+
+<div class="result">
+  <p><b>Old:</b> <span id="old"></span></p>
+  <p><b>New:</b> <span id="new"></span></p>
+  <p><b>Threshold:</b> <span id="th"></span></p>
+  <p><b>Rate:</b> <span id="rate"></span></p>
+</div>
+
+<script>
+
+let data = [];
+
+/* ✅ LOAD JSON */
+fetch('data.json')
+.then(res => res.json())
+.then(json => {
+  data = json;
+  show(data);
+});
+
+/* 🔹 FIND KEY */
+function findKey(obj, keyword){
+  return Object.keys(obj).find(k =>
+    k.toLowerCase().includes(keyword)
+  );
+}
+
+/* 🔹 SHOW LIST */
+function show(arr){
+  const ul = document.getElementById("list");
+  ul.innerHTML = "";
+
+  arr.forEach(item => {
+
+    const key = findKey(item, "nature");
+
+    const li = document.createElement("li");
+    li.textContent = item[key];
+
+    li.onclick = () => {
+
+      document.getElementById("old").textContent =
+        item[findKey(item,"old")] || "-";
+
+      document.getElementById("new").textContent =
+        item[findKey(item,"new act")] || "-";
+
+      document.getElementById("th").textContent =
+        item[findKey(item,"threshold")] || "-";
+
+      document.getElementById("rate").textContent =
+        item[findKey(item,"rate")] || "-";
+    };
+
+    ul.appendChild(li);
+  });
+}
+
+/* 🔍 SEARCH */
+document.getElementById("search").addEventListener("input", function(){
+  const val = this.value.toLowerCase();
+
+  const filtered = data.filter(item =>
+    Object.values(item).join(" ").toLowerCase().includes(val)
+  );
+
+  show(filtered);
+});
+
+</script>
+
+</body>
+</html>
