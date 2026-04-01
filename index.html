@@ -147,10 +147,11 @@ li:hover {
 let data = [];
 
 /* ✅ LOAD JSON (IMPORTANT FIX APPLIED) */
-fetch('TDS%20Rate%20Chart.json')
+  fetch('tds-data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
+  console.log("DATA LOADED:", data);
 });
 
 /* 🔹 FIND KEY SAFELY */
