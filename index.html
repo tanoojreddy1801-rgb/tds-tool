@@ -4,89 +4,202 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {font-family: Arial; padding:15px; background:#f5f7ff;}
-input {width:100%; padding:12px; font-size:16px;}
-ul {list-style:none; padding:0; max-height:200px; overflow-y:auto;}
-li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
-li:hover {background:#e8eaf6;}
-.result {margin-top:15px; background:#eef2ff; padding:10px;}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f5f7ff;
+}
+
+/* 🔹 CARDS */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 250px;
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  background: #1a237e;
+  color: white;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: #3949ab;
+}
+
+/* 🔹 MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: white;
+  width: 95%;
+  max-width: 600px;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* 🔹 SEARCH */
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* 🔹 DROPDOWN */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+li:hover {
+  background: #e8eaf6;
+}
+
+/* 🔹 RESULT */
+.result {
+  margin-top: 15px;
+  background: #eef2ff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* 📱 MOBILE */
+@media (max-width:600px){
+  .container {flex-direction: column;}
+  .card {max-width:100%;}
+}
 </style>
 </head>
 
 <body>
 
-<h3>TDS Compliance Checker</h3>
+<div class="container">
 
-<input type="text" id="search" placeholder="Search...">
-<ul id="list"></ul>
+  <!-- ✅ TDS TOOL -->
+  <div class="card" onclick="openModal()">
+    <h3>TDS Compliance Check</h3>
+    <p>Search & compare provisions</p>
+  </div>
 
-<div class="result">
-  <p><b>Old:</b> <span id="old"></span></p>
-  <p><b>New:</b> <span id="new"></span></p>
-  <p><b>Threshold:</b> <span id="th"></span></p>
-  <p><b>Rate:</b> <span id="rate"></span></p>
+  <!-- ✅ COMING SOON 1 -->
+  <div class="card">
+    <h3>ITR Forms Check</h3>
+    <p>Coming Soon</p>
+  </div>
+
+  <!-- ✅ COMING SOON 2 -->
+  <div class="card">
+    <h3>Other Tools</h3>
+    <p>Coming Soon</p>
+  </div>
+
+</div>
+
+<!-- 🔥 MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+
+    <span onclick="closeModal()" style="float:right;cursor:pointer;font-size:20px;">✖</span>
+
+    <h3>TDS Compliance Checker</h3>
+
+    <input type="text" id="search" placeholder="Type to search...">
+    <ul id="list"></ul>
+
+    <div class="result">
+      <p><b>Old Act:</b> <span id="old"></span></p>
+      <p><b>New Act:</b> <span id="new"></span></p>
+      <p><b>Threshold:</b> <span id="th"></span></p>
+      <p><b>Rate:</b> <span id="rate"></span></p>
+    </div>
+
+  </div>
 </div>
 
 <script>
 
 let data = [];
 
-/* ✅ LOAD JSON */
-fetch('data.json')
+/* ✅ LOAD JSON (IMPORTANT FIX APPLIED) */
+fetch('TDS%20Rate%20Chart.json')
 .then(res => res.json())
 .then(json => {
   data = json;
-  show(data);
 });
 
-/* 🔹 FIND KEY */
+/* 🔹 FIND KEY SAFELY */
 function findKey(obj, keyword){
   return Object.keys(obj).find(k =>
     k.toLowerCase().includes(keyword)
   );
 }
 
-/* 🔹 SHOW LIST */
-function show(arr){
-  const ul = document.getElementById("list");
-  ul.innerHTML = "";
-
-  arr.forEach(item => {
-
-    const key = findKey(item, "nature");
-
-    const li = document.createElement("li");
-    li.textContent = item[key];
-
-    li.onclick = () => {
-
-      document.getElementById("old").textContent =
-        item[findKey(item,"old")] || "-";
-
-      document.getElementById("new").textContent =
-        item[findKey(item,"new act")] || "-";
-
-      document.getElementById("th").textContent =
-        item[findKey(item,"threshold")] || "-";
-
-      document.getElementById("rate").textContent =
-        item[findKey(item,"rate")] || "-";
-    };
-
-    ul.appendChild(li);
-  });
-}
-
-/* 🔍 SEARCH */
+/* 🔹 SEARCH DROPDOWN */
 document.getElementById("search").addEventListener("input", function(){
   const val = this.value.toLowerCase();
+  const list = document.getElementById("list");
+
+  list.innerHTML = "";
+
+  if(!val) return;
 
   const filtered = data.filter(item =>
     Object.values(item).join(" ").toLowerCase().includes(val)
   );
 
-  show(filtered);
+  filtered.forEach(item => {
+
+    const key = findKey(item, "nature");
+
+    const li = document.createElement("li");
+    li.textContent = item[key] || "Unknown";
+
+    li.onclick = () => {
+      document.getElementById("old").textContent = item[findKey(item,"old")] || "-";
+      document.getElementById("new").textContent = item[findKey(item,"new")] || "-";
+      document.getElementById("th").textContent = item[findKey(item,"threshold")] || "-";
+      document.getElementById("rate").textContent = item[findKey(item,"rate")] || "-";
+    };
+
+    list.appendChild(li);
+  });
+
 });
+
+/* 🔹 MODAL */
+function openModal(){
+  document.getElementById("modal").style.display = "block";
+}
+
+function closeModal(){
+  document.getElementById("modal").style.display = "none";
+}
 
 </script>
 
