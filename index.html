@@ -130,7 +130,7 @@ li:hover {
 
 let data = [];
 
-/* FETCH DATA */
+/* LOAD JSON */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
@@ -147,7 +147,7 @@ function renderList(arr){
     const keys = Object.keys(item);
 
     const li = document.createElement("li");
-    li.textContent = item[keys[0]];
+    li.textContent = item[keys[0]] || "Unknown";
 
     li.onclick = () => {
 
@@ -156,7 +156,10 @@ function renderList(arr){
       document.getElementById("th").textContent = item[keys[3]] || "-";
       document.getElementById("rate").textContent = item[keys[4]] || "-";
 
+      /* HIDE LIST AFTER SELECTION */
       document.getElementById("list").style.display = "none";
+
+      /* CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -165,34 +168,37 @@ function renderList(arr){
   });
 }
 
-/* SEARCH */
+/* 🔥 SHOW FULL LIST ON CLICK */
+document.getElementById("search").addEventListener("focus", function(){
+
+  const list = document.getElementById("list");
+
+  list.style.display = "block";
+  renderList(data);
+
+});
+
+/* 🔥 FILTER ON TYPE */
 document.getElementById("search").addEventListener("input", function(){
 
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
 
+  list.style.display = "block";
+
   if(!val){
-    list.style.display = "none";
+    renderList(data); // show full list again
     return;
   }
-
-  list.style.display = "block";
 
   const filtered = data.filter(item =>
     JSON.stringify(item).toLowerCase().includes(val)
   );
 
   renderList(filtered);
-});
 
-/* ACCORDION */
-document.querySelectorAll(".section-header").forEach(header => {
-  header.onclick = () => {
-    header.parentElement.classList.toggle("active");
-  };
 });
 
 </script>
-
 </body>
 </html>
