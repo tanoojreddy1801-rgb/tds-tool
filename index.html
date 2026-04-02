@@ -2,143 +2,40 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
-  background: #f5f7ff;
-}
-
-/* 🔹 CARDS */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
-.card {
-  flex: 1 1 250px;
-  max-width: 300px;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  background: #1a237e;
-  color: white;
-  transition: 0.3s;
-}
-
-.card:hover {
-  background: #3949ab;
-}
-
-/* 🔹 MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-}
-
-.modal-content {
-  background: white;
-  width: 95%;
-  max-width: 600px;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 10px;
-}
-
-/* 🔹 SEARCH */
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-/* 🔹 DROPDOWN */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 5px 0;
-  border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-li:hover {
-  background: #e8eaf6;
-}
-
-/* 🔹 RESULT */
-.result {
-  margin-top: 15px;
-  background: #eef2ff;
-  padding: 10px;
-  border-radius: 8px;
-}
-
-/* 📱 MOBILE */
-@media (max-width:600px){
-  .container {flex-direction: column;}
-  .card {max-width:100%;}
-}
+body {font-family: Arial; padding:20px; background:#f5f7ff;}
+.container {display:flex; flex-wrap:wrap; gap:15px;}
+.card {flex:1 1 250px; background:#1a237e; color:white; padding:20px; cursor:pointer;}
+.modal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);}
+.modal-content {background:white; width:95%; max-width:600px; margin:5% auto; padding:20px;}
+ul {list-style:none; padding:0;}
+li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
+.result {margin-top:15px; background:#eef2ff; padding:10px;}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-
-  <!-- ✅ TDS TOOL -->
-  <div class="card" onclick="openModal()">
-    <h3>TDS Compliance Check</h3>
-    <p>Search & compare provisions</p>
-  </div>
-
-  <!-- ✅ COMING SOON 1 -->
-  <div class="card">
-    <h3>ITR Forms Check</h3>
-    <p>Coming Soon</p>
-  </div>
-
-  <!-- ✅ COMING SOON 2 -->
-  <div class="card">
-    <h3>Other Tools</h3>
-    <p>Coming Soon</p>
-  </div>
-
+  <div class="card" onclick="openModal()">TDS Compliance Check</div>
+  <div class="card">ITR Forms (Coming Soon)</div>
+  <div class="card">Others (Coming Soon)</div>
 </div>
 
-<!-- 🔥 MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
+    <span onclick="closeModal()" style="float:right;cursor:pointer;">✖</span>
+    <h3>TDS Checker</h3>
 
-    <span onclick="closeModal()" style="float:right;cursor:pointer;font-size:20px;">✖</span>
-
-    <h3>TDS Compliance Checker</h3>
-
-    <input type="text" id="search" placeholder="Type to search...">
+    <input type="text" id="search" placeholder="Search..." style="width:100%;padding:10px;">
     <ul id="list"></ul>
 
     <div class="result">
-      <p><b>Old Act:</b> <span id="old"></span></p>
-      <p><b>New Act:</b> <span id="new"></span></p>
-      <p><b>Threshold:</b> <span id="th"></span></p>
-      <p><b>Rate:</b> <span id="rate"></span></p>
+      <p>Old: <span id="old"></span></p>
+      <p>New: <span id="new"></span></p>
+      <p>Threshold: <span id="th"></span></p>
+      <p>Rate: <span id="rate"></span></p>
     </div>
-
   </div>
 </div>
 
@@ -146,60 +43,53 @@ li:hover {
 
 let data = [];
 
-/* ✅ LOAD JSON (IMPORTANT FIX APPLIED) */
-  fetch('tds-data.json')
-.then(res => res.json())
-.then(json => {
-  data = json;
-  console.log("DATA LOADED:", data);
-});
+/* LOAD JSON */
+fetch('data.json')
+.then(r => r.json())
+.then(d => {
+  data = d;
+  console.log("DATA:", data);
+})
+.catch(e => console.error("JSON ERROR:", e));
 
-/* 🔹 FIND KEY SAFELY */
-function findKey(obj, keyword){
-  return Object.keys(obj).find(k =>
-    k.toLowerCase().includes(keyword)
-  );
-}
-
-/* 🔹 SEARCH DROPDOWN */
+/* SEARCH */
 document.getElementById("search").addEventListener("input", function(){
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
-
   list.innerHTML = "";
 
   if(!val) return;
 
-  const filtered = data.filter(item =>
-    Object.values(item).join(" ").toLowerCase().includes(val)
-  );
+  data.forEach(item => {
 
-  filtered.forEach(item => {
+    const text = JSON.stringify(item).toLowerCase();
 
-    const key = findKey(item, "nature");
+    if(text.includes(val)){
 
-    const li = document.createElement("li");
-    li.textContent = item[key] || "Unknown";
+      const li = document.createElement("li");
+      li.textContent = Object.values(item)[0];
 
-    li.onclick = () => {
-      document.getElementById("old").textContent = item[findKey(item,"old")] || "-";
-      document.getElementById("new").textContent = item[findKey(item,"new")] || "-";
-      document.getElementById("th").textContent = item[findKey(item,"threshold")] || "-";
-      document.getElementById("rate").textContent = item[findKey(item,"rate")] || "-";
-    };
+      li.onclick = () => {
+        const vals = Object.values(item);
 
-    list.appendChild(li);
+        document.getElementById("old").textContent = vals[1] || "-";
+        document.getElementById("new").textContent = vals[2] || "-";
+        document.getElementById("th").textContent = vals[3] || "-";
+        document.getElementById("rate").textContent = vals[4] || "-";
+      };
+
+      list.appendChild(li);
+    }
+
   });
-
 });
 
-/* 🔹 MODAL */
 function openModal(){
-  document.getElementById("modal").style.display = "block";
+  document.getElementById("modal").style.display="block";
 }
 
 function closeModal(){
-  document.getElementById("modal").style.display = "none";
+  document.getElementById("modal").style.display="none";
 }
 
 </script>
