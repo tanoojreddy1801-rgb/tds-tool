@@ -126,7 +126,7 @@ li:hover {
   <div class="section-content">Coming Soon</div>
 </div>
 
-<script>
+  <script>
 
 let data = [];
 
@@ -156,10 +156,7 @@ function renderList(arr){
       document.getElementById("th").textContent = item[keys[3]] || "-";
       document.getElementById("rate").textContent = item[keys[4]] || "-";
 
-      /* HIDE LIST AFTER SELECTION */
       document.getElementById("list").style.display = "none";
-
-      /* CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -168,18 +165,22 @@ function renderList(arr){
   });
 }
 
-/* 🔥 SHOW FULL LIST ON CLICK */
-document.getElementById("search").addEventListener("focus", function(){
-
+/* 🔥 UNIVERSAL TRIGGER (MOBILE + DESKTOP) */
+function showList(){
   const list = document.getElementById("list");
-
   list.style.display = "block";
   renderList(data);
+}
 
-});
+const searchBox = document.getElementById("search");
 
-/* 🔥 FILTER ON TYPE */
-document.getElementById("search").addEventListener("input", function(){
+/* MULTIPLE EVENTS FOR RELIABILITY */
+searchBox.addEventListener("focus", showList);
+searchBox.addEventListener("click", showList);
+searchBox.addEventListener("touchstart", showList);
+
+/* 🔍 FILTER ON TYPE */
+searchBox.addEventListener("input", function(){
 
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
@@ -187,7 +188,7 @@ document.getElementById("search").addEventListener("input", function(){
   list.style.display = "block";
 
   if(!val){
-    renderList(data); // show full list again
+    renderList(data);
     return;
   }
 
@@ -200,5 +201,6 @@ document.getElementById("search").addEventListener("input", function(){
 });
 
 </script>
+
 </body>
 </html>
