@@ -95,6 +95,14 @@ fetch('data.json')
   data = json;
 });
 
+/* 🔹 SAFE KEY FINDER (CORE FIX) */
+function getVal(obj, keyword){
+  const key = Object.keys(obj).find(k =>
+    k.toLowerCase().replace(/\s+/g,'').includes(keyword)
+  );
+  return key ? obj[key] : "";
+}
+
 /* 🔹 RENDER LIST */
 function renderList(arr){
   const list = document.getElementById("list");
@@ -102,20 +110,22 @@ function renderList(arr){
 
   arr.forEach(item => {
 
-    const keys = Object.keys(item);
-
     const li = document.createElement("li");
-    li.textContent = item[keys[0]] || "Unknown";
+
+    li.textContent = getVal(item, "nature") || "Unknown";
 
     li.onclick = () => {
 
-      document.getElementById("nature").textContent = item[keys[0]] || "-";
-      document.getElementById("old").textContent = item[keys[1]] || "-";
-      document.getElementById("new").textContent = item[keys[2]] || "-";
-      document.getElementById("th").textContent = item[keys[3]] || "-";
-      document.getElementById("rate").textContent = item[keys[4]] || "-";
+      document.getElementById("nature").textContent = getVal(item,"nature") || "-";
+      document.getElementById("old").textContent = getVal(item,"old") || "-";
+      document.getElementById("new").textContent = getVal(item,"new") || "-";
+      document.getElementById("th").textContent = getVal(item,"threshold") || "-";
+      document.getElementById("rate").textContent = getVal(item,"rate") || "-";
 
-      list.style.display = "none";
+      /* HIDE LIST */
+      document.getElementById("list").style.display = "none";
+
+      /* CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -124,7 +134,7 @@ function renderList(arr){
   });
 }
 
-/* 🔥 SHOW LIST (MOBILE + DESKTOP SAFE) */
+/* 🔥 SHOW LIST (MOBILE SAFE) */
 function showList(){
   const list = document.getElementById("list");
   list.style.display = "block";
