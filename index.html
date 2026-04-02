@@ -74,6 +74,18 @@ ul {
   border-radius: 8px;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 8px;
+
+  display: none;   /* 🔥 THIS IS THE KEY FIX */
+}
+  
 li {
   padding: 10px;
   cursor: pointer;
