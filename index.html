@@ -4,45 +4,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
-/* GLOBAL */
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  background: #f7f9fc;
   margin: 0;
   padding: 15px;
-  background: #f7f9fc;
 }
 
-/* SECTION CARD */
-.section {
+/* BOX */
+.box {
   background: white;
-  border-radius: 14px;
-  margin-bottom: 15px;
-  border: 1px solid #e5e7eb;
-  overflow: hidden;
-}
-
-/* HEADER */
-.section-header {
   padding: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.section-header:hover {
-  background: #eef2ff;
-}
-
-/* CONTENT */
-.section-content {
-  display: none;
-  padding: 15px;
-}
-
-/* ACTIVE */
-.section.active .section-content {
-  display: block;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  max-width: 600px;
+  margin: auto;
 }
 
 /* INPUT */
@@ -50,7 +26,7 @@ input {
   width: 100%;
   padding: 14px;
   font-size: 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid #ccc;
 }
 
@@ -60,7 +36,7 @@ ul {
   padding: 0;
   margin-top: 10px;
   border: 1px solid #ddd;
-  border-radius: 10px;
+  border-radius: 8px;
   display: none;
 }
 
@@ -79,65 +55,47 @@ li:hover {
   margin-top: 15px;
   background: #eef2ff;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
-/* MOBILE FIX */
-@media (max-width:600px){
-  body {
-    padding: 10px;
-  }
+#nature {
+  font-weight: 600;
+  color: #1a237e;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- 🔥 TDS TOOL -->
-<div class="section active">
+<div class="box">
 
-  <div class="section-header">TDS Compliance Check</div>
+<h3>TDS Compliance Check</h3>
 
-  <div class="section-content">
+<input type="text" id="search" placeholder="Click or type to search...">
+<ul id="list"></ul>
 
-    <input type="text" id="search" placeholder="Search Nature of Payment...">
-
-    <ul id="list"></ul>
-
-    <div class="result">
-      <p><b>Old Act:</b> <span id="old"></span></p>
-      <p><b>New Act:</b> <span id="new"></span></p>
-      <p><b>Threshold:</b> <span id="th"></span></p>
-      <p><b>Rate:</b> <span id="rate"></span></p>
-    </div>
-
-  </div>
+<div class="result">
+  <p><b>Nature of Payment:</b> <span id="nature"></span></p>
+  <p><b>Old Act:</b> <span id="old"></span></p>
+  <p><b>New Act:</b> <span id="new"></span></p>
+  <p><b>Threshold:</b> <span id="th"></span></p>
+  <p><b>Rate:</b> <span id="rate"></span></p>
 </div>
 
-<!-- 🔥 COMING SOON -->
-<div class="section">
-  <div class="section-header">ITR Forms Check & Comparison</div>
-  <div class="section-content">Coming Soon</div>
 </div>
 
-<div class="section">
-  <div class="section-header">Other Tools</div>
-  <div class="section-content">Coming Soon</div>
-</div>
-
-  <script>
+<script>
 
 let data = [];
 
-/* LOAD JSON */
+/* 🔥 FETCH JSON */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
 
-/* RENDER LIST */
+/* 🔹 RENDER LIST */
 function renderList(arr){
   const list = document.getElementById("list");
   list.innerHTML = "";
@@ -151,12 +109,13 @@ function renderList(arr){
 
     li.onclick = () => {
 
+      document.getElementById("nature").textContent = item[keys[0]] || "-";
       document.getElementById("old").textContent = item[keys[1]] || "-";
       document.getElementById("new").textContent = item[keys[2]] || "-";
       document.getElementById("th").textContent = item[keys[3]] || "-";
       document.getElementById("rate").textContent = item[keys[4]] || "-";
 
-      document.getElementById("list").style.display = "none";
+      list.style.display = "none";
       document.getElementById("search").value = "";
 
     };
@@ -165,22 +124,22 @@ function renderList(arr){
   });
 }
 
-/* 🔥 UNIVERSAL TRIGGER (MOBILE + DESKTOP) */
+/* 🔥 SHOW LIST (MOBILE + DESKTOP SAFE) */
 function showList(){
   const list = document.getElementById("list");
   list.style.display = "block";
   renderList(data);
 }
 
-const searchBox = document.getElementById("search");
+const search = document.getElementById("search");
 
-/* MULTIPLE EVENTS FOR RELIABILITY */
-searchBox.addEventListener("focus", showList);
-searchBox.addEventListener("click", showList);
-searchBox.addEventListener("touchstart", showList);
+/* MULTI-EVENT SUPPORT */
+search.addEventListener("focus", showList);
+search.addEventListener("click", showList);
+search.addEventListener("touchstart", showList);
 
-/* 🔍 FILTER ON TYPE */
-searchBox.addEventListener("input", function(){
+/* 🔍 FILTER */
+search.addEventListener("input", function(){
 
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
