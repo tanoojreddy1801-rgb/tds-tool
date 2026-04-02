@@ -2,40 +2,150 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-body {font-family: Arial; padding:20px; background:#f5f7ff;}
-.container {display:flex; flex-wrap:wrap; gap:15px;}
-.card {flex:1 1 250px; background:#1a237e; color:white; padding:20px; cursor:pointer;}
-.modal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6);}
-.modal-content {background:white; width:95%; max-width:600px; margin:5% auto; padding:20px;}
-ul {list-style:none; padding:0;}
-li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
-.result {margin-top:15px; background:#eef2ff; padding:10px;}
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f6fb;
+}
+
+/* 🔹 CARDS */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 260px;
+  max-width: 300px;
+  padding: 22px;
+  border-radius: 14px;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #1a237e, #3949ab);
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* 🔹 MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  width: 95%;
+  max-width: 650px;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* 🔹 SEARCH */
+input {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* 🔹 LIST */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 8px;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  transition: 0.2s;
+}
+
+li:hover {
+  background: #e8eaf6;
+}
+
+/* 🔹 RESULT */
+.result {
+  margin-top: 15px;
+  background: #eef2ff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+/* 📱 MOBILE */
+@media (max-width:600px){
+  .container {flex-direction: column;}
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <div class="card" onclick="openModal()">TDS Compliance Check</div>
-  <div class="card">ITR Forms (Coming Soon)</div>
-  <div class="card">Others (Coming Soon)</div>
+
+  <!-- ✅ TDS -->
+  <div class="card" onclick="openModal()">
+    <h3>TDS Compliance Check</h3>
+    <p>Search & compare provisions</p>
+  </div>
+
+  <!-- ✅ COMING SOON -->
+  <div class="card">
+    <h3>ITR Forms</h3>
+    <p>Coming Soon</p>
+  </div>
+
+  <div class="card">
+    <h3>Other Tools</h3>
+    <p>Coming Soon</p>
+  </div>
+
 </div>
 
+<!-- 🔥 MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
-    <span onclick="closeModal()" style="float:right;cursor:pointer;">✖</span>
-    <h3>TDS Checker</h3>
 
-    <input type="text" id="search" placeholder="Search..." style="width:100%;padding:10px;">
+    <span onclick="closeModal()" style="float:right;cursor:pointer;font-size:20px;">✖</span>
+
+    <h3>TDS Compliance Checker</h3>
+
+    <input type="text" id="search" placeholder="Search Nature of Payment...">
+
     <ul id="list"></ul>
 
     <div class="result">
-      <p>Old: <span id="old"></span></p>
-      <p>New: <span id="new"></span></p>
-      <p>Threshold: <span id="th"></span></p>
-      <p>Rate: <span id="rate"></span></p>
+      <p><b>Old Act:</b> <span id="old"></span></p>
+      <p><b>New Act:</b> <span id="new"></span></p>
+      <p><b>Threshold:</b> <span id="th"></span></p>
+      <p><b>Rate:</b> <span id="rate"></span></p>
     </div>
+
   </div>
 </div>
 
@@ -43,12 +153,21 @@ li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
 
 let data = [];
 
+/* 🔹 LOAD JSON */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
-  console.log("DATA:", data);
+  console.log("DATA LOADED:", data);
 });
+
+/* 🔹 FLEXIBLE KEY FINDER */
+function getVal(obj, keyword){
+  const key = Object.keys(obj).find(k =>
+    k.toLowerCase().replace(/\s+/g,'').includes(keyword)
+  );
+  return key ? obj[key] : "";
+}
 
 /* 🔹 RENDER LIST */
 function renderList(arr){
@@ -56,14 +175,17 @@ function renderList(arr){
   list.innerHTML = "";
 
   arr.forEach(item => {
+
     const li = document.createElement("li");
-    li.textContent = item["Nature of Payment"] || "Unknown";
+    li.textContent = getVal(item, "nature") || "Unknown";
 
     li.onclick = () => {
-      document.getElementById("old").textContent = item["Old Act"] || "-";
-      document.getElementById("new").textContent = item["New Act"] || "-";
-      document.getElementById("th").textContent = item["Threshold"] || "-";
-      document.getElementById("rate").textContent = item["Rate"] || "-";
+
+      document.getElementById("old").textContent = getVal(item,"old");
+      document.getElementById("new").textContent = getVal(item,"new");
+      document.getElementById("th").textContent = getVal(item,"threshold");
+      document.getElementById("rate").textContent = getVal(item,"rate");
+
     };
 
     list.appendChild(li);
@@ -84,9 +206,7 @@ document.getElementById("search").addEventListener("input", function(){
 /* 🔹 MODAL */
 function openModal(){
   document.getElementById("modal").style.display = "block";
-
-  // 👉 SHOW ALL ITEMS ON OPEN
-  renderList(data);
+  renderList(data); // show full list
 }
 
 function closeModal(){
@@ -94,6 +214,6 @@ function closeModal(){
 }
 
 </script>
-  
+
 </body>
 </html>
