@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <style>
 body {
@@ -35,7 +36,7 @@ body {
   transform: translateY(-5px);
 }
 
-/* MODAL */
+/* MODAL BACKDROP */
 .modal {
   display: none;
   position: fixed;
@@ -43,23 +44,28 @@ body {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.6);
+  z-index: 999;
 }
 
+/* 🔥 MOBILE BOTTOM SHEET */
 .modal-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 85vh;
   background: white;
-  width: 95%;
-  max-width: 650px;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 12px;
+  border-radius: 15px 15px 0 0;
+  padding: 15px;
+  overflow-y: auto;
 }
 
 /* SEARCH */
 input {
   width: 100%;
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 10px;
   border: 1px solid #ccc;
 }
 
@@ -69,25 +75,16 @@ ul {
   padding: 0;
   margin: 10px 0;
   border: 1px solid #ddd;
-  max-height: 220px;
-  overflow-y: auto;
-  border-radius: 8px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  max-height: 220px;
+  max-height: 250px;
   overflow-y: auto;
   border-radius: 8px;
 
-  display: none;   /* 🔥 THIS IS THE KEY FIX */
+  display: none; /* 🔥 important */
 }
-  
+
 li {
-  padding: 10px;
+  padding: 14px;
+  font-size: 15px;
   cursor: pointer;
   border-bottom: 1px solid #eee;
 }
@@ -104,9 +101,11 @@ li:hover {
   border-radius: 10px;
 }
 
-/* MOBILE */
+/* MOBILE STACK */
 @media (max-width:600px){
-  .container {flex-direction: column;}
+  .container {
+    flex-direction: column;
+  }
 }
 </style>
 </head>
@@ -117,7 +116,7 @@ li:hover {
 
   <div class="card" onclick="openModal()">
     <h3>TDS Compliance Check</h3>
-    <p>Search & compare provisions (start typing your payment type)</p>
+    <p>Search & compare provisions</p>
   </div>
 
   <div class="card">
@@ -135,11 +134,11 @@ li:hover {
 <div id="modal" class="modal">
   <div class="modal-content">
 
-    <span onclick="closeModal()" style="float:right;cursor:pointer;font-size:20px;">✖</span>
+    <span onclick="closeModal()" style="float:right;font-size:20px;cursor:pointer;">✖</span>
 
     <h3>TDS Checker</h3>
 
-    <input type="text" id="search" placeholder="Start typing...">
+    <input type="text" id="search" placeholder="Search...">
     <ul id="list"></ul>
 
     <div class="result">
@@ -174,7 +173,6 @@ function renderList(arr){
 
     const li = document.createElement("li");
 
-    /* FIRST COLUMN AS NAME */
     li.textContent = item[keys[0]] || "Unknown";
 
     li.onclick = () => {
@@ -184,10 +182,7 @@ function renderList(arr){
       document.getElementById("th").textContent = item[keys[3]] || "-";
       document.getElementById("rate").textContent = item[keys[4]] || "-";
 
-      /* 🔥 HIDE LIST AFTER CLICK */
       document.getElementById("list").style.display = "none";
-
-      /* OPTIONAL: CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -196,7 +191,7 @@ function renderList(arr){
   });
 }
 
-/* SEARCH BEHAVIOUR */
+/* SEARCH */
 document.getElementById("search").addEventListener("input", function(){
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
@@ -219,15 +214,16 @@ document.getElementById("search").addEventListener("input", function(){
 /* MODAL CONTROL */
 function openModal(){
   document.getElementById("modal").style.display = "block";
-
-  /* HIDE LIST INITIALLY */
+  document.body.style.overflow = "hidden";
   document.getElementById("list").style.display = "none";
 }
 
 function closeModal(){
   document.getElementById("modal").style.display = "none";
+  document.body.style.overflow = "auto";
 }
 
 </script>
+
 </body>
 </html>
