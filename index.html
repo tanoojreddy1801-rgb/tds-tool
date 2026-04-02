@@ -4,46 +4,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
+/* GLOBAL */
 body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: #f7f9fc;
+  font-family: 'Segoe UI', Arial, sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 15px;
+  background: #f7f9fc;
 }
 
-/* SECTION BUTTONS */
-details {
+/* SECTION CARD */
+.section {
   background: white;
-  border-radius: 12px;
+  border-radius: 14px;
   margin-bottom: 15px;
   border: 1px solid #e5e7eb;
   overflow: hidden;
 }
 
-summary {
-  padding: 16px;
-  font-size: 16px;
+/* HEADER */
+.section-header {
+  padding: 15px;
   font-weight: 600;
   cursor: pointer;
-  list-style: none;
+  font-size: 16px;
 }
 
-summary:hover {
+.section-header:hover {
   background: #eef2ff;
 }
 
 /* CONTENT */
 .section-content {
+  display: none;
   padding: 15px;
 }
 
-/* SEARCH */
+/* ACTIVE */
+.section.active .section-content {
+  display: block;
+}
+
+/* INPUT */
 input {
   width: 100%;
   padding: 14px;
+  font-size: 16px;
   border-radius: 10px;
   border: 1px solid #ccc;
-  font-size: 16px;
 }
 
 /* LIST */
@@ -52,14 +60,14 @@ ul {
   padding: 0;
   margin-top: 10px;
   border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
+  border-radius: 10px;
   display: none;
 }
 
 li {
   padding: 12px;
   cursor: pointer;
+  border-bottom: 1px solid #eee;
 }
 
 li:hover {
@@ -69,9 +77,16 @@ li:hover {
 /* RESULT */
 .result {
   margin-top: 15px;
-  background: #f1f5f9;
+  background: #eef2ff;
   padding: 12px;
   border-radius: 10px;
+}
+
+/* MOBILE FIX */
+@media (max-width:600px){
+  body {
+    padding: 10px;
+  }
 }
 
 </style>
@@ -80,12 +95,14 @@ li:hover {
 <body>
 
 <!-- 🔥 TDS TOOL -->
-<details>
-  <summary>TDS Compliance Check</summary>
+<div class="section active">
+
+  <div class="section-header">TDS Compliance Check</div>
 
   <div class="section-content">
 
     <input type="text" id="search" placeholder="Search Nature of Payment...">
+
     <ul id="list"></ul>
 
     <div class="result">
@@ -96,34 +113,31 @@ li:hover {
     </div>
 
   </div>
-</details>
+</div>
 
 <!-- 🔥 COMING SOON -->
-<details>
-  <summary>ITR Forms Check & Comparison</summary>
-  <div class="section-content">
-    Coming Soon
-  </div>
-</details>
+<div class="section">
+  <div class="section-header">ITR Forms Check & Comparison</div>
+  <div class="section-content">Coming Soon</div>
+</div>
 
-<details>
-  <summary>Other Tools</summary>
-  <div class="section-content">
-    Coming Soon
-  </div>
-</details>
+<div class="section">
+  <div class="section-header">Other Tools</div>
+  <div class="section-content">Coming Soon</div>
+</div>
 
 <script>
 
 let data = [];
 
+/* FETCH DATA */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
 
-/* RENDER */
+/* RENDER LIST */
 function renderList(arr){
   const list = document.getElementById("list");
   list.innerHTML = "";
@@ -159,7 +173,6 @@ document.getElementById("search").addEventListener("input", function(){
 
   if(!val){
     list.style.display = "none";
-    list.innerHTML = "";
     return;
   }
 
@@ -170,6 +183,13 @@ document.getElementById("search").addEventListener("input", function(){
   );
 
   renderList(filtered);
+});
+
+/* ACCORDION */
+document.querySelectorAll(".section-header").forEach(header => {
+  header.onclick = () => {
+    header.parentElement.classList.toggle("active");
+  };
 });
 
 </script>
