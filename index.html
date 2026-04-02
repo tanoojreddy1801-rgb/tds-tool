@@ -43,56 +43,57 @@ li {padding:10px; border-bottom:1px solid #ddd; cursor:pointer;}
 
 let data = [];
 
-/* LOAD JSON */
 fetch('data.json')
-.then(r => r.json())
-.then(d => {
-  data = d;
+.then(res => res.json())
+.then(json => {
+  data = json;
   console.log("DATA:", data);
-})
-.catch(e => console.error("JSON ERROR:", e));
+});
 
-/* SEARCH */
-document.getElementById("search").addEventListener("input", function(){
-  const val = this.value.toLowerCase();
+/* 🔹 RENDER LIST */
+function renderList(arr){
   const list = document.getElementById("list");
   list.innerHTML = "";
 
-  if(!val) return;
+  arr.forEach(item => {
+    const li = document.createElement("li");
+    li.textContent = item["Nature of Payment"] || "Unknown";
 
-  data.forEach(item => {
+    li.onclick = () => {
+      document.getElementById("old").textContent = item["Old Act"] || "-";
+      document.getElementById("new").textContent = item["New Act"] || "-";
+      document.getElementById("th").textContent = item["Threshold"] || "-";
+      document.getElementById("rate").textContent = item["Rate"] || "-";
+    };
 
-    const text = JSON.stringify(item).toLowerCase();
-
-    if(text.includes(val)){
-
-      const li = document.createElement("li");
-      li.textContent = Object.values(item)[0];
-
-      li.onclick = () => {
-        const vals = Object.values(item);
-
-        document.getElementById("old").textContent = vals[1] || "-";
-        document.getElementById("new").textContent = vals[2] || "-";
-        document.getElementById("th").textContent = vals[3] || "-";
-        document.getElementById("rate").textContent = vals[4] || "-";
-      };
-
-      list.appendChild(li);
-    }
-
+    list.appendChild(li);
   });
+}
+
+/* 🔹 SEARCH */
+document.getElementById("search").addEventListener("input", function(){
+  const val = this.value.toLowerCase();
+
+  const filtered = data.filter(item =>
+    JSON.stringify(item).toLowerCase().includes(val)
+  );
+
+  renderList(filtered);
 });
 
+/* 🔹 MODAL */
 function openModal(){
-  document.getElementById("modal").style.display="block";
+  document.getElementById("modal").style.display = "block";
+
+  // 👉 SHOW ALL ITEMS ON OPEN
+  renderList(data);
 }
 
 function closeModal(){
-  document.getElementById("modal").style.display="none";
+  document.getElementById("modal").style.display = "none";
 }
 
 </script>
-
+  
 </body>
 </html>
