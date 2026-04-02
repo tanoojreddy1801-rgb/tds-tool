@@ -162,7 +162,7 @@ function renderList(arr){
 
     const li = document.createElement("li");
 
-    /* FIRST COLUMN = NAME */
+    /* FIRST COLUMN AS NAME */
     li.textContent = item[keys[0]] || "Unknown";
 
     li.onclick = () => {
@@ -172,15 +172,30 @@ function renderList(arr){
       document.getElementById("th").textContent = item[keys[3]] || "-";
       document.getElementById("rate").textContent = item[keys[4]] || "-";
 
+      /* 🔥 HIDE LIST AFTER CLICK */
+      document.getElementById("list").style.display = "none";
+
+      /* OPTIONAL: CLEAR SEARCH */
+      document.getElementById("search").value = "";
+
     };
 
     list.appendChild(li);
   });
 }
 
-/* SEARCH */
+/* SEARCH BEHAVIOUR */
 document.getElementById("search").addEventListener("input", function(){
   const val = this.value.toLowerCase();
+  const list = document.getElementById("list");
+
+  if(!val){
+    list.style.display = "none";
+    list.innerHTML = "";
+    return;
+  }
+
+  list.style.display = "block";
 
   const filtered = data.filter(item =>
     JSON.stringify(item).toLowerCase().includes(val)
@@ -189,10 +204,12 @@ document.getElementById("search").addEventListener("input", function(){
   renderList(filtered);
 });
 
-/* MODAL */
+/* MODAL CONTROL */
 function openModal(){
   document.getElementById("modal").style.display = "block";
-  renderList(data);
+
+  /* HIDE LIST INITIALLY */
+  document.getElementById("list").style.display = "none";
 }
 
 function closeModal(){
@@ -200,6 +217,5 @@ function closeModal(){
 }
 
 </script>
-
 </body>
 </html>
