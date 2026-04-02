@@ -1,136 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
-/* GLOBAL */
-html, body {
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f7f9fc;
   margin: 0;
   padding: 20px;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: #f7f9fc;
-  color: #1a1a1a;
-  overscroll-behavior: none; /* 🔥 prevents double scroll bounce */
 }
 
-/* CONTAINER */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-/* CARDS */
-.card {
-  flex: 1 1 260px;
-  max-width: 300px;
-  padding: 22px;
-  border-radius: 16px;
-  text-align: left;
-  cursor: pointer;
+/* SECTION BUTTONS */
+details {
   background: white;
+  border-radius: 12px;
+  margin-bottom: 15px;
   border: 1px solid #e5e7eb;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
 }
 
-.card h3 {
-  margin: 0 0 8px;
-  font-size: 18px;
-}
-
-.card p {
-  margin: 0;
-  font-size: 14px;
-  color: #6b7280;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: #6366f1;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* MODAL BACKDROP */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
-  z-index: 999;
-}
-
-/* 🔥 FULL SCREEN MODAL (NO DOUBLE SCROLL) */
-.modal-content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
+summary {
   padding: 16px;
-  overflow-y: auto; /* only scroll layer */
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
 }
 
-/* DESKTOP CENTER MODAL */
-@media (min-width: 768px){
-  .modal-content {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 700px;
-    height: auto;
-    max-height: 85vh;
-    border-radius: 18px;
-  }
+summary:hover {
+  background: #eef2ff;
+}
+
+/* CONTENT */
+.section-content {
+  padding: 15px;
 }
 
 /* SEARCH */
 input {
   width: 100%;
   padding: 14px;
-  font-size: 15px;
-  border-radius: 12px;
-  border: 1px solid #d1d5db;
-  outline: none;
-  margin-top: 10px;
-  transition: 0.2s;
-}
-
-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
 /* LIST */
 ul {
   list-style: none;
   padding: 0;
-  margin: 10px 0;
-  border: 1px solid #e5e7eb;
-  max-height: 250px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  max-height: 200px;
   overflow-y: auto;
-  border-radius: 12px;
   display: none;
-  background: white;
 }
 
 li {
-  padding: 12px 14px;
-  font-size: 14px;
+  padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid #f1f5f9;
-  transition: 0.2s;
-}
-
-li:last-child {
-  border-bottom: none;
 }
 
 li:hover {
@@ -140,34 +69,9 @@ li:hover {
 /* RESULT */
 .result {
   margin-top: 15px;
-  background: #f8fafc;
-  padding: 14px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-}
-
-.result p {
-  margin: 6px 0;
-  font-size: 14px;
-}
-
-/* CLOSE BUTTON */
-.close-btn {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-  color: #6b7280;
-}
-
-.close-btn:hover {
-  color: black;
-}
-
-/* MOBILE STACK */
-@media (max-width:600px){
-  .container {
-    flex-direction: column;
-  }
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 10px;
 }
 
 </style>
@@ -175,33 +79,13 @@ li:hover {
 
 <body>
 
-<div class="container">
+<!-- 🔥 TDS TOOL -->
+<details>
+  <summary>TDS Compliance Check</summary>
 
-  <div class="card" onclick="openModal()">
-    <h3>TDS Compliance Check</h3>
-    <p>Search & compare provisions</p>
-  </div>
+  <div class="section-content">
 
-  <div class="card">
-    <h3>ITR Forms</h3>
-    <p>Coming Soon</p>
-  </div>
-
-  <div class="card">
-    <h3>Other Tools</h3>
-    <p>Coming Soon</p>
-  </div>
-
-</div>
-
-<div id="modal" class="modal">
-  <div class="modal-content">
-
-    <span onclick="closeModal()" style="float:right;font-size:20px;cursor:pointer;">✖</span>
-
-    <h3>TDS Checker</h3>
-
-    <input type="text" id="search" placeholder="Search...">
+    <input type="text" id="search" placeholder="Search Nature of Payment...">
     <ul id="list"></ul>
 
     <div class="result">
@@ -212,20 +96,34 @@ li:hover {
     </div>
 
   </div>
-</div>
+</details>
+
+<!-- 🔥 COMING SOON -->
+<details>
+  <summary>ITR Forms Check & Comparison</summary>
+  <div class="section-content">
+    Coming Soon
+  </div>
+</details>
+
+<details>
+  <summary>Other Tools</summary>
+  <div class="section-content">
+    Coming Soon
+  </div>
+</details>
 
 <script>
 
 let data = [];
 
-/* LOAD JSON */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
 
-/* RENDER LIST */
+/* RENDER */
 function renderList(arr){
   const list = document.getElementById("list");
   list.innerHTML = "";
@@ -235,8 +133,7 @@ function renderList(arr){
     const keys = Object.keys(item);
 
     const li = document.createElement("li");
-
-    li.textContent = item[keys[0]] || "Unknown";
+    li.textContent = item[keys[0]];
 
     li.onclick = () => {
 
@@ -256,6 +153,7 @@ function renderList(arr){
 
 /* SEARCH */
 document.getElementById("search").addEventListener("input", function(){
+
   const val = this.value.toLowerCase();
   const list = document.getElementById("list");
 
@@ -273,18 +171,6 @@ document.getElementById("search").addEventListener("input", function(){
 
   renderList(filtered);
 });
-
-/* MODAL CONTROL */
-function openModal(){
-  document.getElementById("modal").style.display = "block";
-  document.body.style.overflow = "hidden";
-  document.getElementById("list").style.display = "none";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display = "none";
-  document.body.style.overflow = "auto";
-}
 
 </script>
 
