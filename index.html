@@ -5,6 +5,7 @@
 
 <style>
 
+/* GLOBAL */
 body {
   font-family: 'Segoe UI', sans-serif;
   background: #f4f6fb;
@@ -12,6 +13,7 @@ body {
   padding: 30px 10px;
 }
 
+/* CARD */
 .box {
   max-width: 520px;
   margin: auto;
@@ -21,11 +23,13 @@ body {
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* TITLE */
 .box h3 {
   text-align: center;
   color: #1f2a6b;
 }
 
+/* INPUT */
 input {
   width: 100%;
   padding: 14px;
@@ -33,6 +37,7 @@ input {
   border: 1px solid #ccc;
 }
 
+/* LIST */
 ul {
   list-style: none;
   padding: 0;
@@ -53,6 +58,7 @@ li:hover {
   background: #eef1ff;
 }
 
+/* RESULT */
 .result {
   margin-top: 18px;
   background: #eef1ff;
@@ -64,6 +70,20 @@ li:hover {
 .result p {
   margin: 8px 0;
 }
+
+/* BADGE */
+.badge {
+  display:inline-block;
+  padding:5px 10px;
+  border-radius:6px;
+  font-size:13px;
+  margin-top:5px;
+  font-weight:600;
+}
+
+.green { background:#e6f9ed; color:#0a7a33; }
+.red { background:#ffe6e6; color:#b30000; }
+.gray { background:#eee; color:#555; }
 
 </style>
 </head>
@@ -84,6 +104,7 @@ li:hover {
   <p><b>New Threshold (FY 2026-27 onwards):</b> <span id="th"></span></p>
   <p><b>Applicable rate:</b> <span id="rate"></span></p>
   <p><b>Applicable rate (if further amended by Finance Act, 2026):</b> <span id="rate2026"></span></p>
+  <p><span id="rateBadge"></span></p>
 </div>
 
 </div>
@@ -99,11 +120,18 @@ fetch('https://tanoojreddy1801-rgb.github.io/tds-tool/data.json')
   data = json;
 });
 
-/* EXACT KEY MATCHER (SAFE FOR \n) */
+/* EXACT KEY MATCH */
 function get(obj, keyName){
   return Object.keys(obj).find(k =>
     k.replace(/\n/g,'').trim() === keyName
   );
+}
+
+/* EXTRACT NUMBER FOR COMPARISON */
+function extractNumber(val){
+  if(!val) return 0;
+  const match = val.match(/[\d.]+/);
+  return match ? parseFloat(match[0]) : 0;
 }
 
 /* RENDER LIST */
@@ -126,12 +154,34 @@ function renderList(arr){
       const rateKey = get(item, "Applicable rate");
       const rate2026Key = get(item, "Applicable rate (if further amended by Finance Act, 2026)");
 
+      const rate = rateKey ? item[rateKey] : "";
+      const rate2026 = rate2026Key ? item[rate2026Key] : "";
+
       document.getElementById("nature").textContent = natureKey ? item[natureKey] : "-";
       document.getElementById("old").textContent = oldKey ? item[oldKey] : "-";
       document.getElementById("new").textContent = newKey ? item[newKey] : "-";
       document.getElementById("th").textContent = thKey ? item[thKey] : "-";
-      document.getElementById("rate").textContent = rateKey ? item[rateKey] : "-";
-      document.getElementById("rate2026").textContent = rate2026Key ? item[rate2026Key] : "-";
+      document.getElementById("rate").textContent = rate || "-";
+      document.getElementById("rate2026").textContent = rate2026 || "-";
+
+      /* RATE COMPARISON */
+      const r1 = extractNumber(rate);
+      const r2 = extractNumber(rate2026);
+
+      const badge = document.getElementById("rateBadge");
+      badge.innerHTML = "";
+
+      if(r1 && r2){
+        if(r2 > r1){
+          badge.innerHTML = '<span class="badge red">↑ Rate Increased</span>';
+        }
+        else if(r2 < r1){
+          badge.innerHTML = '<span class="badge green">↓ Rate Reduced</span>';
+        }
+        else{
+          badge.innerHTML = '<span class="badge gray">No Change</span>';
+        }
+      }
 
       list.style.display = "none";
       document.getElementById("search").value = "";
