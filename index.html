@@ -100,23 +100,12 @@ li:hover {
 
 let data = [];
 
-/* 🔥 FETCH YOUR JSON */
+/* 🔥 FETCH JSON */
 fetch('https://tanoojreddy1801-rgb.github.io/tds-tool/data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
-
-/* 🔥 CLEAN KEY FUNCTION (CRITICAL FIX) */
-function clean(str){
-  return str.toLowerCase().replace(/\s+/g,'').replace(/\n/g,'');
-}
-
-/* 🔥 GET VALUE SAFELY */
-function getVal(obj, target){
-  const key = Object.keys(obj).find(k => clean(k).includes(target));
-  return key ? obj[key] : "";
-}
 
 /* RENDER LIST */
 function renderList(arr){
@@ -127,33 +116,34 @@ function renderList(arr){
 
     const li = document.createElement("li");
 
-    li.textContent = getVal(item, "natureofpayment") || "Unknown";
+    li.textContent = item["Nature of Payment "] || "Unknown";
 
     li.onclick = () => {
 
       document.getElementById("nature").textContent =
-        getVal(item, "natureofpayment") || "-";
+        item["Nature of Payment "] || "-";
 
       document.getElementById("old").textContent =
-        getVal(item, "oldact1961") || "-";
+        item["Old Act (1961)"] || "-";
 
       document.getElementById("new").textContent =
-        getVal(item, "newact2025") || "-";
+        item["New Act (2025)"] || "-";
 
       document.getElementById("person").textContent =
-        getVal(item, "specifiedperson") || "-";
+        item["Specified Person for this purpose"] || "-";
 
       document.getElementById("th").textContent =
-        getVal(item, "threshold") || "-";
+        item["Threshold"] || "-";
 
       document.getElementById("rate").textContent =
-        getVal(item, "applicablerate") || "-";
+        item["Applicable rate"] || "-";
 
       document.getElementById("rate2026").textContent =
-        getVal(item, "2026") || "-";
+        item["Applicable rate \n(if further amended by \nFinance Act, 2026)"] || "-";
 
       list.style.display = "none";
       document.getElementById("search").value = "";
+
     };
 
     list.appendChild(li);
