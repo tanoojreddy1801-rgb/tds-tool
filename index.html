@@ -13,11 +13,11 @@ body {
   padding: 30px 10px;
 }
 
-/* MAIN CARD */
+/* CARD */
 .box {
   max-width: 520px;
   margin: auto;
-  background: #ffffff;
+  background: #fff;
   padding: 25px;
   border-radius: 18px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
@@ -28,8 +28,6 @@ body {
 .box h3 {
   text-align: center;
   color: #1f2a6b;
-  font-size: 22px;
-  margin-bottom: 20px;
 }
 
 /* INPUT */
@@ -100,12 +98,17 @@ li:hover {
 
 let data = [];
 
-/* 🔥 FETCH JSON */
+/* FETCH JSON */
 fetch('https://tanoojreddy1801-rgb.github.io/tds-tool/data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
+
+/* 🔥 FIND KEY SAFELY */
+function findKey(obj, text){
+  return Object.keys(obj).find(k => k.toLowerCase().includes(text));
+}
 
 /* RENDER LIST */
 function renderList(arr){
@@ -114,36 +117,32 @@ function renderList(arr){
 
   arr.forEach(item => {
 
-    const li = document.createElement("li");
+    const natureKey = findKey(item, "nature");
 
-    li.textContent = item["Nature of Payment "] || "Unknown";
+    const li = document.createElement("li");
+    li.textContent = natureKey ? item[natureKey] : "Unknown";
 
     li.onclick = () => {
 
       document.getElementById("nature").textContent =
-        item["Nature of Payment "] || "-";
+        natureKey ? item[natureKey] : "-";
 
-      document.getElementById("old").textContent =
-        item["Old Act (1961)"] || "-";
+      const oldKey = findKey(item, "old");
+      const newKey = findKey(item, "new");
+      const personKey = findKey(item, "specified");
+      const thKey = findKey(item, "threshold");
+      const rateKey = findKey(item, "applicable rate");
+      const rate2026Key = findKey(item, "2026");
 
-      document.getElementById("new").textContent =
-        item["New Act (2025)"] || "-";
-
-      document.getElementById("person").textContent =
-        item["Specified Person for this purpose"] || "-";
-
-      document.getElementById("th").textContent =
-        item["Threshold"] || "-";
-
-      document.getElementById("rate").textContent =
-        item["Applicable rate"] || "-";
-
-      document.getElementById("rate2026").textContent =
-        item["Applicable rate \n(if further amended by \nFinance Act, 2026)"] || "-";
+      document.getElementById("old").textContent = oldKey ? item[oldKey] : "-";
+      document.getElementById("new").textContent = newKey ? item[newKey] : "-";
+      document.getElementById("person").textContent = personKey ? item[personKey] : "-";
+      document.getElementById("th").textContent = thKey ? item[thKey] : "-";
+      document.getElementById("rate").textContent = rateKey ? item[rateKey] : "-";
+      document.getElementById("rate2026").textContent = rate2026Key ? item[rate2026Key] : "-";
 
       list.style.display = "none";
       document.getElementById("search").value = "";
-
     };
 
     list.appendChild(li);
