@@ -1,15 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>TDS Compliance Check | Income Tax Act 1961 vs 2025 Comparison</title>
-
-<meta name="description" content="Compare TDS provisions under Income Tax Act 1961 and the proposed Income Tax Act 2025. Check rates, thresholds and section mapping instantly.">
-
-<meta name="keywords" content="TDS comparison 2025 India, Income Tax Act 2025 TDS, old vs new TDS, section 194 changes, TDS rates India">
 
 <style>
 
@@ -33,31 +25,11 @@ body {
 }
 
 /* TITLE */
-.box h1 {
+.box h3 {
   text-align: center;
   color: #1f2a6b;
   font-size: 22px;
-  margin-bottom: 10px;
-}
-
-/* SUBTEXT */
-.subtext {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 15px;
-}
-
-/* TRUST BADGES */
-.badges {
-  text-align: center;
-  font-size: 13px;
-  color: #444;
-  margin-bottom: 15px;
-}
-
-.badges span {
-  margin: 0 6px;
+  margin-bottom: 20px;
 }
 
 /* LABEL */
@@ -126,14 +98,6 @@ li:hover {
   color: #1f2a6b;
 }
 
-/* SEO TEXT */
-.seo-text {
-  margin-top: 20px;
-  font-size: 13px;
-  color: #555;
-  line-height: 1.6;
-}
-
 /* MOBILE */
 @media (max-width:600px){
   .box {
@@ -148,20 +112,10 @@ li:hover {
 
 <div class="box">
 
-<!-- 🔥 SEO HEADER -->
-<h1>📊 TDS Compliance Check (1961 vs 2025)</h1>
-<p class="subtext">Compare TDS provisions, rates and thresholds under the new Income Tax Act, 2025</p>
+<h3>TDS Compliance Check</h3>
 
-<!-- 🔥 TRUST -->
-<div class="badges">
-  <span>✔ Professional Use</span>
-  <span>✔ Updated for 2025</span>
-  <span>✔ Instant Comparison</span>
-</div>
-
-<!-- 🔹 TOOL -->
 <p class="label">Search / Select Nature of Payment:</p>
-<input type="text" id="search" placeholder="Click or type to search TDS provisions...">
+<input type="text" id="search" placeholder="Click or type to search...">
 <ul id="list"></ul>
 
 <div class="result">
@@ -172,26 +126,20 @@ li:hover {
   <p><b>Rate:</b> <span id="rate"></span></p>
 </div>
 
-<!-- 🔥 SEO CONTENT -->
-<div class="seo-text">
-  <b>TDS Provisions under Income Tax Act, 2025:</b><br>
-  This tool helps professionals compare Tax Deducted at Source (TDS) provisions between the Income Tax Act, 1961 and the proposed Income Tax Act, 2025. It simplifies section mapping, rate comparison, and threshold applicability for various payments including salary, rent, commission, and professional fees.
-</div>
-
 </div>
 
 <script>
 
 let data = [];
 
-/* FETCH JSON */
+/* 🔥 FETCH JSON */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
 
-/* SAFE KEY FINDER */
+/* 🔹 SAFE KEY FINDER (CORE FIX) */
 function getVal(obj, keyword){
   const key = Object.keys(obj).find(k =>
     k.toLowerCase().replace(/\s+/g,'').includes(keyword)
@@ -199,7 +147,7 @@ function getVal(obj, keyword){
   return key ? obj[key] : "";
 }
 
-/* RENDER LIST */
+/* 🔹 RENDER LIST */
 function renderList(arr){
   const list = document.getElementById("list");
   list.innerHTML = "";
@@ -207,6 +155,7 @@ function renderList(arr){
   arr.forEach(item => {
 
     const li = document.createElement("li");
+
     li.textContent = getVal(item, "nature") || "Unknown";
 
     li.onclick = () => {
@@ -217,7 +166,10 @@ function renderList(arr){
       document.getElementById("th").textContent = getVal(item,"threshold") || "-";
       document.getElementById("rate").textContent = getVal(item,"rate") || "-";
 
+      /* HIDE LIST */
       document.getElementById("list").style.display = "none";
+
+      /* CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -226,7 +178,7 @@ function renderList(arr){
   });
 }
 
-/* SHOW LIST */
+/* 🔥 SHOW LIST (MOBILE SAFE) */
 function showList(){
   const list = document.getElementById("list");
   list.style.display = "block";
@@ -235,11 +187,12 @@ function showList(){
 
 const search = document.getElementById("search");
 
+/* MULTI-EVENT SUPPORT */
 search.addEventListener("focus", showList);
 search.addEventListener("click", showList);
 search.addEventListener("touchstart", showList);
 
-/* FILTER */
+/* 🔍 FILTER */
 search.addEventListener("input", function(){
 
   const val = this.value.toLowerCase();
