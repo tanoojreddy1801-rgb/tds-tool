@@ -46,16 +46,9 @@ input {
   font-size: 15px;
   border-radius: 10px;
   border: 1px solid #dcdfe6;
-  outline: none;
-  transition: 0.2s;
 }
 
-input:focus {
-  border-color: #4c5bd4;
-  box-shadow: 0 0 0 3px rgba(76,91,212,0.1);
-}
-
-/* DROPDOWN LIST */
+/* DROPDOWN */
 ul {
   list-style: none;
   padding: 0;
@@ -68,16 +61,14 @@ ul {
 
 li {
   padding: 12px;
-  font-size: 14px;
   cursor: pointer;
-  border-bottom: 1px solid #f1f1f1;
 }
 
 li:hover {
   background: #eef1ff;
 }
 
-/* RESULT CARD */
+/* RESULT */
 .result {
   margin-top: 18px;
   background: #eef1ff;
@@ -86,13 +77,10 @@ li:hover {
   border-left: 5px solid #2d3dbf;
 }
 
-/* RESULT TEXT */
 .result p {
   margin: 8px 0;
-  font-size: 15px;
 }
 
-/* HIGHLIGHT FIELD */
 #nature {
   font-weight: 600;
   color: #1f2a6b;
@@ -120,10 +108,12 @@ li:hover {
 
 <div class="result">
   <p><b>Nature of Payment:</b> <span id="nature"></span></p>
-  <p><b>Old Act:</b> <span id="old"></span></p>
-  <p><b>New Act:</b> <span id="new"></span></p>
+  <p><b>Old Act (1961):</b> <span id="old"></span></p>
+  <p><b>New Act (2025):</b> <span id="new"></span></p>
+  <p><b>Specified Person:</b> <span id="person"></span></p>
   <p><b>Threshold:</b> <span id="th"></span></p>
-  <p><b>Rate:</b> <span id="rate"></span></p>
+  <p><b>Applicable Rate:</b> <span id="rate"></span></p>
+  <p><b>Rate (Finance Act 2026):</b> <span id="rate2026"></span></p>
 </div>
 
 </div>
@@ -132,14 +122,14 @@ li:hover {
 
 let data = [];
 
-/* 🔥 FETCH JSON */
+/* 🔥 FETCH JSON FROM GITHUB */
 fetch('data.json')
 .then(res => res.json())
 .then(json => {
   data = json;
 });
 
-/* 🔹 SAFE KEY FINDER (CORE FIX) */
+/* 🔥 SMART KEY FINDER */
 function getVal(obj, keyword){
   const key = Object.keys(obj).find(k =>
     k.toLowerCase().replace(/\s+/g,'').includes(keyword)
@@ -155,21 +145,19 @@ function renderList(arr){
   arr.forEach(item => {
 
     const li = document.createElement("li");
-
     li.textContent = getVal(item, "nature") || "Unknown";
 
     li.onclick = () => {
 
       document.getElementById("nature").textContent = getVal(item,"nature") || "-";
-      document.getElementById("old").textContent = getVal(item,"old") || "-";
-      document.getElementById("new").textContent = getVal(item,"new") || "-";
+      document.getElementById("old").textContent = getVal(item,"old act") || "-";
+      document.getElementById("new").textContent = getVal(item,"new act") || "-";
+      document.getElementById("person").textContent = getVal(item,"specified") || "-";
       document.getElementById("th").textContent = getVal(item,"threshold") || "-";
-      document.getElementById("rate").textContent = getVal(item,"rate") || "-";
+      document.getElementById("rate").textContent = getVal(item,"applicable rate") || "-";
+      document.getElementById("rate2026").textContent = getVal(item,"2026") || "-";
 
-      /* HIDE LIST */
       document.getElementById("list").style.display = "none";
-
-      /* CLEAR SEARCH */
       document.getElementById("search").value = "";
 
     };
@@ -178,7 +166,7 @@ function renderList(arr){
   });
 }
 
-/* 🔥 SHOW LIST (MOBILE SAFE) */
+/* 🔥 SHOW LIST */
 function showList(){
   const list = document.getElementById("list");
   list.style.display = "block";
@@ -187,7 +175,6 @@ function showList(){
 
 const search = document.getElementById("search");
 
-/* MULTI-EVENT SUPPORT */
 search.addEventListener("focus", showList);
 search.addEventListener("click", showList);
 search.addEventListener("touchstart", showList);
