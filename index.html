@@ -5,54 +5,40 @@
 
 <style>
 
-/* GLOBAL */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #eef2ff, #f7f9fc);
+  background: #f4f6fb;
   margin: 0;
   padding: 30px 10px;
 }
 
-/* CARD */
 .box {
   max-width: 520px;
   margin: auto;
-  background: #ffffff;
+  background: #fff;
   padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-/* TITLE */
 .box h3 {
   text-align: center;
   color: #1f2a6b;
-  margin-bottom: 20px;
-  font-size: 22px;
 }
 
-/* INPUT */
 input {
   width: 100%;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid #d0d5dd;
-  font-size: 15px;
-  transition: 0.2s;
+  border: 1px solid #ccc;
 }
 
-input:focus {
-  border-color: #4c5bd4;
-  box-shadow: 0 0 0 3px rgba(76,91,212,0.1);
-}
-
-/* LIST */
 ul {
   list-style: none;
   padding: 0;
   margin-top: 10px;
-  border-radius: 12px;
   border: 1px solid #ddd;
+  border-radius: 10px;
   display: none;
   max-height: 220px;
   overflow-y: auto;
@@ -61,55 +47,22 @@ ul {
 li {
   padding: 12px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 li:hover {
   background: #eef1ff;
 }
 
-/* RESULT CARD */
 .result {
-  margin-top: 20px;
-  background: #f4f6ff;
-  padding: 18px;
-  border-radius: 16px;
-  border-left: 6px solid #4c5bd4;
+  margin-top: 18px;
+  background: #eef1ff;
+  padding: 15px;
+  border-radius: 12px;
+  border-left: 5px solid #2d3dbf;
 }
 
-/* FIELD */
-.field {
-  margin: 10px 0;
-}
-
-/* LABEL */
-.label {
-  font-weight: 600;
-  color: #1f2a6b;
-}
-
-/* VALUE */
-.value {
-  margin-left: 5px;
-}
-
-/* RATE BADGE */
-.badge {
-  display: inline-block;
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 13px;
-  margin-left: 8px;
-}
-
-/* COLORS */
-.green { background:#e6f9ed; color:#0a7a33; }
-.red { background:#ffe6e6; color:#b30000; }
-.gray { background:#eee; color:#555; }
-
-/* MOBILE */
-@media (max-width:600px){
-  .box { padding:18px; }
+.result p {
+  margin: 8px 0;
 }
 
 </style>
@@ -119,23 +72,18 @@ li:hover {
 
 <div class="box">
 
-<h3>📊 TDS Compliance Check</h3>
+<h3>TDS Compliance Check</h3>
 
 <input type="text" id="search" placeholder="Search nature of payment...">
 <ul id="list"></ul>
 
 <div class="result">
-  <div class="field"><span class="label">Nature:</span><span class="value" id="nature"></span></div>
-  <div class="field"><span class="label">Old Act:</span><span class="value" id="old"></span></div>
-  <div class="field"><span class="label">New Act:</span><span class="value" id="new"></span></div>
-  <div class="field"><span class="label">Specified Person:</span><span class="value" id="person"></span></div>
-  <div class="field"><span class="label">Threshold:</span><span class="value" id="th"></span></div>
-  <div class="field"><span class="label">Rate:</span><span class="value" id="rate"></span></div>
-  <div class="field">
-    <span class="label">Rate 2026:</span>
-    <span class="value" id="rate2026"></span>
-    <span id="badge"></span>
-  </div>
+  <p><b>Nature of Payment:</b> <span id="nature"></span></p>
+  <p><b>Old Act (1961):</b> <span id="old"></span></p>
+  <p><b>New Act (2025):</b> <span id="new"></span></p>
+  <p><b>New Threshold (FY 2026-27 onwards):</b> <span id="th"></span></p>
+  <p><b>Applicable rate:</b> <span id="rate"></span></p>
+  <p><b>Applicable rate (if further amended by Finance Act, 2026):</b> <span id="rate2026"></span></p>
 </div>
 
 </div>
@@ -144,25 +92,18 @@ li:hover {
 
 let data = [];
 
-/* FETCH */
+/* FETCH JSON */
 fetch('https://tanoojreddy1801-rgb.github.io/tds-tool/data.json')
 .then(res => res.json())
-.then(json => data = json);
+.then(json => {
+  data = json;
+});
 
-/* CLEAN KEY */
-function cleanKey(str){
-  return str.toLowerCase().replace(/\n/g,'').trim();
-}
-
-/* FIND KEY */
-function findKey(obj, keyword){
-  return Object.keys(obj).find(k => cleanKey(k).includes(keyword));
-}
-
-/* RATE COMPARISON */
-function getRateValue(rate){
-  if(!rate) return 0;
-  return parseFloat(rate.replace('%','')) || 0;
+/* EXACT KEY MATCHER (SAFE FOR \n) */
+function get(obj, keyName){
+  return Object.keys(obj).find(k =>
+    k.replace(/\n/g,'').trim() === keyName
+  );
 }
 
 /* RENDER LIST */
@@ -172,47 +113,25 @@ function renderList(arr){
 
   arr.forEach(item => {
 
-    const natureKey = findKey(item,"nature");
+    const natureKey = get(item, "Nature of Payment");
 
     const li = document.createElement("li");
     li.textContent = natureKey ? item[natureKey] : "Unknown";
 
     li.onclick = () => {
 
-      const oldKey = findKey(item,"old");
-      const newKey = findKey(item,"new");
-      const personKey = findKey(item,"specified");
-      const thKey = findKey(item,"threshold");
-      const rateKey = findKey(item,"applicable rate");
-      const rate2026Key = findKey(item,"2026");
+      const oldKey = get(item, "Old Act (1961)");
+      const newKey = get(item, "New Act (2025)");
+      const thKey = get(item, "New Threshold (FY 2026-27 onwards)");
+      const rateKey = get(item, "Applicable rate");
+      const rate2026Key = get(item, "Applicable rate (if further amended by Finance Act, 2026)");
 
-      const rate = rateKey ? item[rateKey] : "-";
-      const rate2026 = rate2026Key ? item[rate2026Key] : "-";
-
-      document.getElementById("nature").textContent = item[natureKey] || "-";
+      document.getElementById("nature").textContent = natureKey ? item[natureKey] : "-";
       document.getElementById("old").textContent = oldKey ? item[oldKey] : "-";
       document.getElementById("new").textContent = newKey ? item[newKey] : "-";
-      document.getElementById("person").textContent = personKey ? item[personKey] : "-";
       document.getElementById("th").textContent = thKey ? item[thKey] : "-";
-      document.getElementById("rate").textContent = rate;
-      document.getElementById("rate2026").textContent = rate2026;
-
-      /* 🔥 RATE CHANGE BADGE */
-      const badge = document.getElementById("badge");
-      badge.innerHTML = "";
-
-      const r1 = getRateValue(rate);
-      const r2 = getRateValue(rate2026);
-
-      if(r2 > r1){
-        badge.innerHTML = '<span class="badge green">↑ Increased</span>';
-      }
-      else if(r2 < r1 && r2 !== 0){
-        badge.innerHTML = '<span class="badge red">↓ Reduced</span>';
-      }
-      else{
-        badge.innerHTML = '<span class="badge gray">No Change</span>';
-      }
+      document.getElementById("rate").textContent = rateKey ? item[rateKey] : "-";
+      document.getElementById("rate2026").textContent = rate2026Key ? item[rate2026Key] : "-";
 
       list.style.display = "none";
       document.getElementById("search").value = "";
@@ -222,7 +141,7 @@ function renderList(arr){
   });
 }
 
-/* SHOW */
+/* SHOW LIST */
 function showList(){
   document.getElementById("list").style.display = "block";
   renderList(data);
