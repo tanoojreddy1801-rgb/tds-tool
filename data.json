@@ -6,7 +6,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "-",
     "Applicable rate": "Rates in force - - (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - - (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS"
   },
   {
     "Nature of Payment ": "Accumulated balance of EPF",
@@ -15,7 +15,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "50000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Commission to Insurance Agent",
@@ -24,7 +24,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "20000",
     "Applicable rate": "Rates in force - \n2% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(v)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - \n2% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(v)"
   },
   {
     "Nature of Payment ": "Brokerage and Commission",
@@ -33,7 +33,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "20000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Rent on Machinery",
@@ -42,7 +42,7 @@
     "Specified Person for this purpose": "Individual or, HUF with Turnover from Business above 1Cr or, from Profession above 50 L",
     "Threshold": "50000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Rent on other than Machinery",
@@ -51,7 +51,7 @@
     "Specified Person for this purpose": "Individual or, HUF with Turnover from Business above 1Cr or, from Profession above 50 L",
     "Threshold": "50000",
     "Applicable rate": "(a) 2% - if Rent on Plant and machinery\n(b) 10% - if rent on others",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "(a) 2% - if Rent on Plant and machinery\n(b) 10% - if rent on others"
   },
   {
     "Nature of Payment ": "Payment under Specified agreement",
@@ -60,7 +60,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Payment of Compulsory Acquisition (both compensation and enhanced compensation)",
@@ -69,7 +69,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "500000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Income in respect of Specified mutual fund",
@@ -78,7 +78,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Interest to unitholder of Business Trust",
@@ -87,7 +87,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Dividend to unitholder of Business Trust",
@@ -96,7 +96,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Distribution to unitholder of Business Trust being a Real Estate Investment Trust",
@@ -105,7 +105,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Income in respect of units of Specified Investment Fund",
@@ -114,7 +114,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Income in respect of units of Specified Securitization Trust",
@@ -123,7 +123,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Interest on Securities",
@@ -132,7 +132,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(vii)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(vii)"
   },
   {
     "Nature of Payment ": "Interest other than Interest on Securities",
@@ -141,7 +141,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "100000",
     "Applicable rate": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)"
   },
   {
     "Nature of Payment ": "Interest other than Interest on Securities",
@@ -150,7 +150,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "50000",
     "Applicable rate": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)"
   },
   {
     "Nature of Payment ": "Interest other than Interest on Securities",
@@ -159,7 +159,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - \n10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(i)"
   },
   {
     "Nature of Payment ": "Payment under a Contract",
@@ -168,7 +168,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "Rs. 30,000/- for single payment\nRs. 1,00,000/- aggregate payments under a contract",
     "Applicable rate": "1%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "1%"
   },
   {
     "Nature of Payment ": "Payment under a Contract",
@@ -177,7 +177,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "Rs. 30,000/- for single payment\nRs. 1,00,000/- aggregate payments under a contract",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Payments by Individual or, HUF other than those required to deduct tax under 194C, 194J, 194H",
@@ -186,7 +186,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "5000000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Payments by Individual or, HUF other than those required to deduct tax under 194C, 194J, 194H",
@@ -195,7 +195,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "5000000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Profressional Fees",
@@ -204,7 +204,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "50000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Dividend",
@@ -213,7 +213,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Payment from Life Insurance Policies",
@@ -222,7 +222,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "100000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Payment on purchase of goods\nabove 50,00,000/-",
@@ -231,7 +231,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "-",
     "Applicable rate": "0%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "0%"
   },
   {
     "Nature of Payment ": "Payment to Specified Senior Citizen",
@@ -240,7 +240,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "As applicable",
     "Applicable rate": "Rates in force - 10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(vii)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - 10% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(vii)"
   },
   {
     "Nature of Payment ": "Payment of Benefits and Perquisistes",
@@ -249,7 +249,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "20000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Remittance by ECO for sale of goods or services by participant through such ECO",
@@ -258,7 +258,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "0%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "0%"
   },
   {
     "Nature of Payment ": "Consideration on sale of Virtual Digital Assets",
@@ -267,7 +267,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "0",
     "Applicable rate": "1%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "1%"
   },
   {
     "Nature of Payment ": "Casual Incomes except online gaming and horse races",
@@ -276,7 +276,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(ii)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(ii)"
   },
   {
     "Nature of Payment ": "Casual Income from online gaming",
@@ -285,7 +285,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "-",
     "Applicable rate": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(iv)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(iv)"
   },
   {
     "Nature of Payment ": "Casual Income from Horse Races",
@@ -294,7 +294,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "10000",
     "Applicable rate": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(iii)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force - 30% (as per Finance Act, 2026)\nSch - I, Part II : Rates of TDS - \nPara 1(a)(iii)"
   },
   {
     "Nature of Payment ": "Commissioon on sale of lottery tickets etc",
@@ -303,7 +303,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "20000",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Payment of Cash (withdrawals of cash from Banks, post offices or cooperative societies)",
@@ -312,7 +312,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "1. 3,00,00,000/- if recipient is Co-opreative society\n2. 1,00,00,000/- if recipient is other than Co-operative society",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Payment of Cash (withdrawals of cash from Banks, post offices or cooperative societies)",
@@ -321,7 +321,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "1. 3,00,00,000/- if recipient is Co-opreative society\n2. 1,00,00,000/- if recipient is other than Co-operative society",
     "Applicable rate": "2%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "2%"
   },
   {
     "Nature of Payment ": "Withdrawal from NSS (no deduction under this  section post 04.04.2025 vide notification 27/2025 dt 04.04.2025) - NO RELAXATION YET UNDER THE NEW ACT",
@@ -330,7 +330,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "2500",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Payment to Partners of a Firm",
@@ -339,7 +339,7 @@
     "Specified Person for this purpose": "-",
     "Threshold": "20000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Consideration on sale of sepcified goods",
@@ -573,7 +573,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "20%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "20%"
   },
   {
     "Nature of Payment ": "Interest payable in respect of moneys borrowed in foreign currency (under loan agreement / LT infra bond before 1 July 2023)",
@@ -582,7 +582,7 @@
     "Specified Person for this purpose": "Any Indian company or a business trust",
     "Threshold": "Nil",
     "Applicable rate": "5%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "5%"
   },
   {
     "Nature of Payment ": "Interest payable in respect of moneys borrowed from outside India by issue of rupee denominated bond before 1 July 2023",
@@ -591,7 +591,7 @@
     "Specified Person for this purpose": "Any Indian company or a business trust",
     "Threshold": "Nil",
     "Applicable rate": "5%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "5%"
   },
   {
     "Nature of Payment ": "Interest payable in respect of moneys borrowed from outside India by issue of any LT bond or rupee denominated bond listed in IFSC",
@@ -600,7 +600,7 @@
     "Specified Person for this purpose": "Any Indian company or a business trust",
     "Threshold": "Nil",
     "Applicable rate": "(a) 4% (issued before 1 Jul 2023); (b) 9% (issued on/after 1 Jul 2023)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "(a) 4% (issued before 1 Jul 2023); (b) 9% (issued on/after 1 Jul 2023)"
   },
   {
     "Nature of Payment ": "Interest received from infrastructure debt fund",
@@ -609,7 +609,7 @@
     "Specified Person for this purpose": "Any infrastructure debt fund",
     "Threshold": "Nil",
     "Applicable rate": "5%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "5%"
   },
   {
     "Nature of Payment ": "Distributed income from business trust (Interest or Dividend nature)",
@@ -618,7 +618,7 @@
     "Specified Person for this purpose": "Any business trust",
     "Threshold": "Nil",
     "Applicable rate": "(a) 5% (interest nature); (b) 10% (dividend nature)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "(a) 5% (interest nature); (b) 10% (dividend nature)"
   },
   {
     "Nature of Payment ": "Distributed income from business trust (Rent nature)",
@@ -627,7 +627,7 @@
     "Specified Person for this purpose": "Any business trust",
     "Threshold": "Nil",
     "Applicable rate": "Rates in force",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force"
   },
   {
     "Nature of Payment ": "Income in respect of units of an investment fund,",
@@ -636,7 +636,7 @@
     "Specified Person for this purpose": "Any investment fund specified in sec 224",
     "Threshold": "Nil",
     "Applicable rate": "Rates in force",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force"
   },
   {
     "Nature of Payment ": "Income in respect of an investment in a securitisation trust",
@@ -645,7 +645,7 @@
     "Specified Person for this purpose": "Any securitisation trust specified in sec 221",
     "Threshold": "Nil",
     "Applicable rate": "Rates in force",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force"
   },
   {
     "Nature of Payment ": "Income in respect of units of a Mutual Fund or specified company,,",
@@ -654,7 +654,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "20% (or treaty rate if lower)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "20% (or treaty rate if lower)"
   },
   {
     "Nature of Payment ": "Income in respect of units to an offshore fund",
@@ -663,7 +663,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Long-term capital gains arising from the transfer of units to an offshore fund",
@@ -672,7 +672,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "12.50%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "12.50%"
   },
   {
     "Nature of Payment ": "Interest or dividends in respect of bonds or Global Depository Receipts (GDRs),",
@@ -681,7 +681,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Long-term capital gains arising from the transfer of bonds or GDRs",
@@ -690,7 +690,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "12.50%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "12.50%"
   },
   {
     "Nature of Payment ": "Income of Foreign Institutional Investors (FII) from securities,",
@@ -699,7 +699,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "20% (or treaty rate if lower)",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "20% (or treaty rate if lower)"
   },
   {
     "Nature of Payment ": "Income of Specified Fund from securities",
@@ -708,7 +708,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Any interest or other sum chargeable (not being Salaries)",
@@ -717,7 +717,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "Rates in force",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "Rates in force"
   },
   {
     "Nature of Payment ": "Winnings from lottery, crossword puzzle, race (including horse race), card games, or gambling/betting",
@@ -726,7 +726,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "10000",
     "Applicable rate": "30%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "30%"
   },
   {
     "Nature of Payment ": "Net winnings from online games",
@@ -735,7 +735,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "Nil",
     "Applicable rate": "30%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "30%"
   },
   {
     "Nature of Payment ": "Payment from National Savings Scheme (NSS)",
@@ -744,7 +744,7 @@
     "Specified Person for this purpose": "Any person",
     "Threshold": "2500",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Salary, remuneration, commission, bonus or interest paid to a partner of a firm",
@@ -753,7 +753,7 @@
     "Specified Person for this purpose": "Any person, being a firm",
     "Threshold": "20000",
     "Applicable rate": "10%",
-    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "-"
+    "Applicable rate \n(if further amended by \nFinance Act, 2026)": "10%"
   },
   {
     "Nature of Payment ": "Payment on transfer of certain immovable property other than agricultural land",
