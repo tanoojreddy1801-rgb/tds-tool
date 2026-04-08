@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<style>
+
+/* GLOBAL */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6fb;
+  margin: 0;
+  padding: 30px 10px;
+}
+
+/* CARD */
+.box {
+  max-width: 550px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* TITLE */
+.box h3 {
+  text-align: center;
+  color: #1f2a6b;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+/* DROPDOWN */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: none;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+li {
+  padding: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+li:hover {
+  background: #eef1ff;
+}
+
+/* RESULT */
+.result {
+  margin-top: 18px;
+  background: #eef1ff;
+  padding: 16px;
+  border-radius: 12px;
+  border-left: 5px solid #2d3dbf;
+}
+
+.result p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.label {
+  font-weight: 600;
+  color: #1f2a6b;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h3>Income Tax Forms Comparison</h3>
+
+<input type="text" id="search" placeholder="Search form or purpose...">
+<ul id="list"></ul>
+
+<div class="result">
+  <p><span class="label">Purpose of the Income Tax Form (Old Form No.):</span> <span id="purpose"></span></p>
+  <p><span class="label">Section under Old Act (1961):</span> <span id="oldSec"></span></p>
+  <p><span class="label">Rule under Old Act (1962):</span> <span id="oldRule"></span></p>
+  <p><span class="label">New Form Number under New Act (2025):</span> <span id="newForm"></span></p>
+  <p><span class="label">Section under New Act (2025):</span> <span id="newSec"></span></p>
+  <p><span class="label">Rule under New Act (2026):</span> <span id="newRule"></span></p>
+</div>
+
+</div>
+
+<script>
+
+let data = [];
+
+/* FETCH JSON */
+fetch('https://tanoojreddy1801-rgb.github.io/tds-tool/forms.json') // <-- update filename if needed
+.then(res => res.json())
+.then(json => {
+  data = json;
+});
+
+/* EXACT KEY MATCH FUNCTION */
+function get(obj, key){
+  return obj[key] !== undefined ? obj[key] : "";
+}
+
+/* RENDER LIST */
+function renderList(arr){
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+
+  arr.forEach(item => {
+
+    const text = item["Purpose of the Income Tax Form (Old Form No.)"] || "Unknown";
+
+    const li = document.createElement("li");
+    li.textContent = text;
+
+    li.onclick = () => {
+
+      document.getElementById("purpose").textContent =
+        get(item, "Purpose of the Income Tax Form (Old Form No.)");
+
+      document.getElementById("oldSec").textContent =
+        get(item, "Section under Old Act (1961)");
+
+      document.getElementById("oldRule").textContent =
+        get(item, "Rule under Old Act (1962)");
+
+      document.getElementById("newForm").textContent =
+        get(item, "New Form Number under New Act (2025)");
+
+      document.getElementById("newSec").textContent =
+        get(item, "Section under New Act (2025)");
+
+      document.getElementById("newRule").textContent =
+        get(item, "Rule under New Act (2026)");
+
+      /* HIDE DROPDOWN */
+      list.style.display = "none";
+
+      /* CLEAR SEARCH */
+      document.getElementById("search").value = "";
+    };
+
+    list.appendChild(li);
+  });
+}
+
+/* SHOW DROPDOWN */
+function showList(){
+  const list = document.getElementById("list");
+  list.style.display = "block";
+  renderList(data);
+}
+
+const search = document.getElementById("search");
+
+/* OPEN DROPDOWN ON CLICK */
+search.addEventListener("focus", showList);
+search.addEventListener("click", showList);
+
+/* SEARCH FILTER */
+search.addEventListener("input", function(){
+
+  const val = this.value.toLowerCase();
+
+  const filtered = data.filter(item =>
+    JSON.stringify(item).toLowerCase().includes(val)
+  );
+
+  renderList(filtered);
+  document.getElementById("list").style.display = "block";
+
+});
+
+</script>
+
+</body>
+</html>
