@@ -46,15 +46,14 @@
 
     .panel {
       position: relative;
-      max-width: 760px;
-      margin: 0 auto;
       background: var(--surface);
       backdrop-filter: blur(16px);
       border: 1px solid var(--line);
       border-radius: 28px;
       box-shadow: var(--shadow-lg);
       padding: 26px;
-      overflow: visible;
+      margin-bottom: 22px;
+      overflow: hidden;   /* ✅ FIX */
     }
 
     .panel::before {
